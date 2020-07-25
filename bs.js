@@ -85,7 +85,7 @@
                     }
 
                     var param = {
-                        "name": "貸借",
+                        "name": "純資産",
                         "data": bsdata,
                         "stack": 2,
                         "type": "line",
