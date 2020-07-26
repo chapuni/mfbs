@@ -179,7 +179,25 @@
                 if (lia_dur != "") {
                     $.get("/accounts", parse_acct);
                 } else {
-                    render_bals();
+                    var cat = chart.get().categories;
+                    var d = cat[cat.length - 1];
+                    var xa = dbh.transaction(["lia_accts"], "readonly");
+                    var accts = xa.objectStore("lia_accts");
+                    var getreq = accts.getAll();
+                    getreq.onsuccess = function (evt) {
+                        var result = evt.target.result;
+                        if (typeof(result) == "undefined") {
+                            $.get("/accounts", parse_acct);
+                        } else {
+                            var i;
+                            var xa = dbh.transaction(["lia_bals"], "readwrite");
+                            var bals = xa.objectStore("lia_bals");
+                            for (i = 0; i < result.length; ++i) {
+                                bals.put({date:d, id:result[i]["id"], bal:lia[result[i]["name"]]["bal"]});
+                            }
+                            render_bals();
+                        }
+                    }
                 }
             }
         }
