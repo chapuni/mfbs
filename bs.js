@@ -1,4 +1,15 @@
 (function(){
+    var index_ord = [
+        "預金・現金・仮想通貨",
+        "ポイント",
+        "投資信託",
+        "債券",
+
+        "キャッシング・カードローン",
+        "クレジットカード利用残高",
+        "その他",
+    ]
+
     function update_chart() {
         var req;
         var dbh;
@@ -68,6 +79,7 @@
                         }
                         bsdata[j] = bl;
                     }
+
                     for (cat in lia_cats) {
                         var data = [];
                         for (j = 0; j < cats.length; ++j) {
@@ -90,6 +102,7 @@
                         "name": "純資産",
                         "data": bsdata,
                         "stack": 2,
+                        "index": 300,
                         "type": "line",
                         "color": "red",
                         "lineWidth": 4,
@@ -100,6 +113,21 @@
                     }
 
                     chart.addSeries(param);
+
+                    var param_sers = {}
+
+                    for (i = index_ord.length - 1; i >= 0; --i) {
+                        var name = index_ord[i];
+                        sers = chart.get().series;
+                        for (j = i - 1; j >= 0; --j) {
+                            if (sers[j]["name"] == name) {
+                                param_sers["series"] = [];
+                                param_sers["series"][j] = {index: i + 1};
+                                chart.update(param_sers);
+                                break;
+                            }
+                        }
+                    }
                 }
             }
         }
