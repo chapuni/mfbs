@@ -71,8 +71,10 @@
                     for (cat in lia_cats) {
                         var data = [];
                         for (j = 0; j < cats.length; ++j) {
-                            data.push(lia_date_cat_bals[cats[j]][cat]);
-                            bsdata[j] += lia_date_cat_bals[cats[j]][cat];
+                            var bal = lia_date_cat_bals[cats[j]][cat];
+                            if (typeof(bal) == "undefined") bal = 0;
+                            data.push(bal);
+                            bsdata[j] += bal;
                         }
 
                         var param = {
