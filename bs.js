@@ -255,6 +255,11 @@
         req = indexedDB.open("tn_mf", 1);
         req.onupgradeneeded = db_create;
         req.onsuccess = db_opened;
+
+        $("#copyright").css({padding:0});
+        $(".container-large").css({width:"auto",padding:"1em"});
+        $("#main-container").css({width:"auto"});
+        $("#container_time_series_trend").highcharts().setSize(null);
     }
 
     $("#graph_contents .btn-group a.range-radio").click(function(){
