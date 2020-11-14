@@ -24,7 +24,7 @@
         var lia_ids = [];
         var lia_id;
 
-        function drawAssetTimeSeriesTrendChart(cat,ser) {
+        var x_drawAssetTimeSeriesTrendChart = function (cat,ser) {
             var xa = dbh.transaction(["lia_bals"], "readwrite");
             var bals = xa.objectStore("lia_bals");
 
@@ -38,6 +38,9 @@
                 }
             }
         }
+
+        eval("var drawAssetTimeSeriesTrendChart=" + x_drawAssetTimeSeriesTrendChart.name);
+        eval("var drawAssetTimeSeriesTrendChart=" + x_drawAssetTimeSeriesTrendChart.name);
 
         function render_bals() {
             var xa = dbh.transaction(["lia_accts"], "readonly");
