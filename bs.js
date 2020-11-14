@@ -257,11 +257,12 @@
         req.onupgradeneeded = db_create;
         req.onsuccess = db_opened;
 
-        $("#copyright").css({padding:0});
-        $(".container-large").css({width:"auto",padding:"1em"});
-        $("#main-container").css({width:"auto"});
         $("#container_time_series_trend").highcharts().setSize(null);
     }
+
+    $("#copyright")["css"]({"padding":0});
+    $(".container-large")["css"]({"width":"auto","padding":"1em"});
+    $("#main-container")["css"]({"width":"auto"});
 
     $("#graph_contents .btn-group a.range-radio").click(function(){
         $.getScript($(this).attr("href"), update_chart);
