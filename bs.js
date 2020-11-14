@@ -14,7 +14,6 @@
     function update_chart() {
         var req;
         var dbh;
-        var chart;
         var lastdate = '';
         var lia = {};
         var lia_cats = {};
@@ -23,6 +22,8 @@
         var lia_date_cat_bals = {};
         var lia_ids = [];
         var lia_id;
+
+        var chart = $("#container_time_series_trend")["highcharts"]();
 
         var x_drawAssetTimeSeriesTrendChart = function (cat,ser) {
             var xa = dbh.transaction(["lia_bals"], "readwrite");
@@ -189,8 +190,6 @@
                 }
             });
 
-            chart = $("#container_time_series_trend").highcharts();
-
             var xa = dbh.transaction(["lia_kv"], "readonly");
             var kv = xa.objectStore("lia_kv");
             var getreq = kv.get("lastdate");
@@ -260,7 +259,7 @@
         req.onupgradeneeded = db_create;
         req.onsuccess = db_opened;
 
-        $("#container_time_series_trend").highcharts().setSize(null);
+        chart["setSize"](null);
     }
 
     $("#copyright")["css"]({"padding":0});
