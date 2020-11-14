@@ -4,11 +4,12 @@
         "ポイント",
         "投資信託",
         "債券",
+        "その他の資産",
 
         "キャッシング・カードローン",
         "クレジットカード利用残高",
         "その他",
-    ]
+        ];
 
     function update_chart() {
         var req;
@@ -95,7 +96,7 @@
                             "stack": 1,
                         }
 
-                        chart.addSeries(param);
+                        chart["addSeries"](param);
                     }
 
                     var param = {
@@ -116,13 +117,13 @@
 
                     var param_sers = {}
 
-                    for (i = index_ord.length - 1; i >= 0; --i) {
+                    for (i = 0; i < index_ord.length; ++i) {
                         var name = index_ord[i];
-                        sers = chart.get().series;
-                        for (j = i - 1; j >= 0; --j) {
+                        sers = chart["get"]()["series"];
+                        for (j = 0; j < index_ord.length; ++j) {
                             if (sers[j]["name"] == name) {
                                 param_sers["series"] = [];
-                                param_sers["series"][j] = {index: i + 1};
+                                param_sers["series"][j] = {"index": index_ord.length};
                                 chart.update(param_sers);
                                 break;
                             }
